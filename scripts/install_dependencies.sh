@@ -13,6 +13,8 @@ GATK_DOWNLOAD_DIR=$4
 
 NUM_CPUS=$5
 
+echo "use cores: $NUM_CPUS"
+
 apt-get install -y update
 
 apt-get install -y vim python3 ttf-dejavu wget bzip2
