@@ -506,7 +506,7 @@ print("\n################################################")
 # 5. Create working dir tree
 
 os.system(
-    "mkdir %s ; mkdir  %slogs ; mkdir  %sreports ; mkdir  %sresults ; mkdir %stmp"
+    "mkdir -p %s ; mkdir  -p %slogs ; mkdir  -p %sreports ; mkdir  -p %sresults ; mkdir -p %stmp"
     % (out, out, out, out, out))
 
 
