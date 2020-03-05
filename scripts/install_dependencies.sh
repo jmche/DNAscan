@@ -150,26 +150,6 @@ export PATH=$DNASCAN_DIR/scripts/:$PATH
 # echo export PATH=$DNASCAN_DIR/scripts/:$PATH >> ~/.bashrc
 
 
-cd $INSTALL_DIR
-
-mkdir manta
-
-cd manta
-
-wget https://github.com/Illumina/manta/releases/download/v1.2.1/manta-1.2.1.release_src.tar.bz2
-
-tar -xjf manta-1.2.1.release_src.tar.bz2
-
-mkdir build && cd build
-
-../manta-1.2.1.release_src/configure --jobs=4 --prefix=$INSTALL_DIR/manta/
-
-make -j4 install
-
-export PATH=$INSTALL_DIR/manta/bin:$PATH
-
-echo export PATH=$INSTALL_DIR/manta/bin:$PATH >> ~/.bashrc
-
 echo "###########################################IMPORTANT######################################################"
 echo "Hisat2-build and bwa-index are still creating their indexes. Please wait untill they complete their task."
 echo "You can check whether or not they are still running using the 'top' command"
