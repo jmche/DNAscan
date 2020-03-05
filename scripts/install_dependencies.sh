@@ -23,9 +23,11 @@ apt-get install -y ttf-dejavu
 
 apt-get install -y wget bzip2
 
-mkdir $INSTALL_DIR
+mkdir -p $INSTALL_DIR
 
-mkdir $INSTALL_DIR/humandb
+mkdir -p $INSTALL_DIR/humandb
+
+mkdir -p $DNASCAN_DIR
 
 cd $DNASCAN_DIR
 
