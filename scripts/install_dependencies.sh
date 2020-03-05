@@ -156,7 +156,9 @@ echo "You can check whether or not they are still running using the 'top' comman
 echo "##########################################################################################################"
 
 echo "download files and waiting for it"
+echo $(date)
 wait
+echo $(date)
 echo "All is done"
 
 
