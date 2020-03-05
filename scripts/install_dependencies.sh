@@ -15,7 +15,7 @@ NUM_CPUS=$5
 
 apt-get install -y update
 
-apt-get install -y vim python3 ttf-dejavu wget bzip2 doxygen graphviz graphviz-doc
+apt-get install -y vim python3 ttf-dejavu wget bzip2
 
 mkdir -p $INSTALL_DIR
 
@@ -111,7 +111,7 @@ nohup hisat2-build -p $NUM_CPUS hg19.fa hg19 &
 
 apt-get update -qq
 
-apt-get install -y -qq bzip2 gcc g++ make python zlib1g-dev
+apt-get install -y -qq bzip2 gcc g++ make python zlib1g-dev doxygen graphviz graphviz-doc
 
 cd $INSTALL_DIR
 
