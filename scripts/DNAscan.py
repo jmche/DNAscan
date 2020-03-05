@@ -385,7 +385,7 @@ parser.add_argument(
 parser.add_argument(
     '-dnascan_dir',
     action="store",
-    dest="dnascan_main_dir",
+    dest="dnascan_dir",
     default= "",
     help=
     'path to the DNAscan main dir [string]'
