@@ -1261,7 +1261,7 @@ if SV:
 
             os.system("%stabix -p bed %s/sorted.bed.gz" % (path_tabix, out))
 
-            os.system("mkdir %smanta" % (out))
+            os.system("mkdir -p %smanta" % (out))
 
             os.system(
                 "%sconfigManta.py --bam %s --referenceFasta %s --runDir %smanta --callRegions %s/sorted.bed.gz"
@@ -1269,7 +1269,7 @@ if SV:
 
         else:
 
-            os.system("mkdir %smanta" % (out))
+            os.system("mkdir -p %smanta" % (out))
 
             os.system(
                 "%sconfigManta.py --bam %s --referenceFasta %s --runDir %smanta"
