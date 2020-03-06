@@ -51,7 +51,7 @@ chmod +x Miniconda2-latest-Linux-x86_64.sh
 
 export PATH=$INSTALL_DIR/Miniconda2/bin:$PATH
 
-# echo export PATH=$INSTALL_DIR/Miniconda2/bin:$PATH >> ~/.bashrc
+echo export PATH=$INSTALL_DIR/Miniconda2/bin:$PATH >> ~/.bashrc
 
 conda config --add channels conda-forge
 
