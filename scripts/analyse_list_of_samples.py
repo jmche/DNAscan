@@ -7,7 +7,7 @@
 ################################################################
 # Script structure:
 # 1. Import python modules
-# 2. Define paths viriables
+# 2. Define paths_configs viriables
 # 3. Define options from command line
 # 4. Parse options from command line
 # 5. Run DNAscan for each line in the input sample list
@@ -16,20 +16,20 @@
 #   5.3 Run DNAscan for one sample
 ################################################################
 
-import argparse , os  ,  paths , os.path 
+import argparse, os, os.path 
+import paths_configs
 
 from argparse import RawTextHelpFormatter
 
-# 2. Define paths viriables
+# 2. Define paths_configs viriables
 
-python_path = paths.python_path
-
-dnascan_dir = paths.dnascan_dir
+python_path = "python3"
+dnascan_dir = '/workDir/Tools/DNAscan/scripts/'
 
 
 # 3. Define options from command line
 
-parser = argparse.ArgumentParser(prog='python analyse_list_of_samples.py ', usage='%(prog)s -format "string" -paired "string" -sample_list "string" -out_dir "string" -option_string "string"', description = '############Help Message############ \n\nThis is a script to run DNAscan on a list of samples. Each line of the list must contain the path to one sample. If samples are in paired reads in fastq format and you have two files per sample, these will have to be on the same line spaced bt a tab.\n\n E.g. sample.1.fq.gz  sample.2.fq.gz\n\nDNAscan uses the file paths.py to locate the needed tools and files. Please make sure your paths.py file is properly filled \n\nUsage example: \n\npython alalyse_list_of_files.py -option_string "-format fastq -mode intensive -reference hg19 -alignment -variantcalling -annotation" -out_dir /path/to/dir -sample_list list.txt -format bam\n\nPlease check the following list of required options\n\n################################################', formatter_class=RawTextHelpFormatter)
+parser = argparse.ArgumentParser(prog='python analyse_list_of_samples.py ', usage='%(prog)s -format "string" -paired "string" -sample_list "string" -out_dir "string" -option_string "string"', description = '############Help Message############ \n\nThis is a script to run DNAscan on a list of samples. Each line of the list must contain the path to one sample. If samples are in paired reads in fastq format and you have two files per sample, these will have to be on the same line spaced bt a tab.\n\n E.g. sample.1.fq.gz  sample.2.fq.gz\n\nDNAscan uses the file paths_configs.py to locate the needed tools and files. Please make sure your paths_configs.py file is properly filled \n\nUsage example: \n\npython alalyse_list_of_files.py -option_string "-format fastq -mode intensive -reference hg19 -alignment -variantcalling -annotation" -out_dir /path/to/dir -sample_list list.txt -format bam\n\nPlease check the following list of required options\n\n################################################', formatter_class=RawTextHelpFormatter)
 
 requiredNamed = parser.add_argument_group('required named arguments')
 
@@ -47,6 +47,7 @@ requiredNamed.add_argument( '-paired' , required=True , action = "store" , dest 
 # 4. Parse options from command line
 
 args = parser.parse_args()
+print(args)
 
 option_string = args.option_string
 
@@ -73,9 +74,7 @@ for sample in list_file_lines :
     if paired == "1" and format == "fastq" :
         
         input_file_string = "-in %s -in2 %s" %(sample.split('\t')[0] , sample.split('\t')[1].strip())
-                
-        sample_name = sample.split('\t')[0].split("/")[-1].split("1.f")[-2]
-        
+        sample_name = sample.split('\t')[0].split("/")[-1].split("_R1.f")[-2]
     else :
         
            input_file_string = "-in %s" %( sample.strip() ) 
