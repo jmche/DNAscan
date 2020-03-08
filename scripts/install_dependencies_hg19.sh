@@ -93,7 +93,7 @@ gatk-register $GATK_DOWNLOAD_DIR
 
 cd $DNASCAN_DIR
 
-mkdir hg19
+mkdir -p hg19
 
 cd hg19
 
