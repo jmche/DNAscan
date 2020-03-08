@@ -148,7 +148,7 @@ chmod +x scripts/*
 export PATH=$DNASCAN_DIR/scripts/:$PATH
 
 echo export PATH=$PATH >> ~/.bashrc
-echo export PATH=/workDir/Tools/DNAscanAll/manta/bin:$PATH >> ~/.bashrc
+#echo export PATH=/workDir/Tools/DNAscanAll/manta/bin:$PATH >> ~/.bashrc
 
 
 echo "###########################################IMPORTANT######################################################"
