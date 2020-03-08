@@ -93,7 +93,7 @@ gatk-register $GATK_DOWNLOAD_DIR
 
 cd $DNASCAN_DIR
 
-mkdir hg38
+mkdir -p hg38
 
 cd hg38
 
