@@ -143,7 +143,7 @@ chmod +x scripts/*
 
 export PATH=$DNASCAN_DIR/scripts/:$PATH
 
-echo export PATH=$DNASCAN_DIR/scripts/:$PATH >> ~/.bashrc
+echo export PATH=$PATH >> ~/.bashrc
 
 
 echo "###########################################IMPORTANT######################################################"
