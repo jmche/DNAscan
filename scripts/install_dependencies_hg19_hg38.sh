@@ -107,7 +107,7 @@ gatk-register $GATK_DOWNLOAD_DIR
 
 cd $DNASCAN_DIR
 
-mkdir hg19
+mkdir -p hg19
 
 cd hg19
 
@@ -125,7 +125,9 @@ nohup bwa index hg19.fa &
 
 nohup hisat2-build -p $NUM_CPUS hg19.fa hg19 &
 
-mkdir hg38
+cd $DNASCAN_DIR
+
+mkdir -p hg38
 
 cd hg38
 
