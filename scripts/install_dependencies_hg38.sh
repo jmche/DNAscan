@@ -113,7 +113,7 @@ apt-get install -y -qq bzip2 gcc g++ make python zlib1g-dev doxygen graphviz gra
 
 cd $DNASCAN_DIR
 
-mkdir iobio
+mkdir -p iobio
 
 cd iobio
 
