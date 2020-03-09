@@ -1266,16 +1266,16 @@ if SV:
             os.system("mkdir -p %smanta" % (out))
 
             os.system(
-                "%sconfigManta.py --bam %s --referenceFasta %s --runDir %smanta --callRegions %s/sorted.bed.gz"
-                % (path_manta, bam_file, path_reference, out, out))
+                "python2 $(which configManta.py) --bam %s --referenceFasta %s --runDir %smanta --callRegions %s/sorted.bed.gz"
+                % (bam_file, path_reference, out, out))
 
         else:
 
             os.system("mkdir -p %smanta" % (out))
 
             os.system(
-                "%sconfigManta.py --bam %s --referenceFasta %s --runDir %smanta"
-                % (path_manta, bam_file, path_reference, out))
+                "python2 $(which configManta.py) --bam %s --referenceFasta %s --runDir %smanta"
+                % (bam_file, path_reference, out))
 
         os.system("%smanta/runWorkflow.py -j %s -m local" % (out, num_cpu))
 
