@@ -1313,12 +1313,12 @@ if annotation:
                reference, annovar_protocols, annovar_operations, out))
         if not debug and not alsgenescanner:
             os.system(
-                "rm %sannovar.vcf.hg19_multianno.txt %sannovar.vcf.avinput" %
-                (out, out))
+                "rm %sannovar.vcf.%s_multianno.txt %sannovar.vcf.avinput" %
+                (out, ref_hg, out))
 
         os.system(
-            "mv %s/annovar.vcf.hg19_multianno.vcf %sresults/%s_annotated.vcf ; bgzip -f %sresults/%s_annotated.vcf ; %stabix -fp vcf %sresults/%s_annotated.vcf.gz"
-            % (out, out, sample_name, out, sample_name, path_tabix, out,
+            "mv %s/annovar.vcf.%s_multianno.vcf %sresults/%s_annotated.vcf ; bgzip -f %sresults/%s_annotated.vcf ; %stabix -fp vcf %sresults/%s_annotated.vcf.gz"
+            % (out, ref_hg, out, sample_name, out, sample_name, path_tabix, out,
                sample_name))
 
         os.system("mv %s %sresults/" % (variant_results_file, out))
@@ -1746,8 +1746,8 @@ if iobio:
 if alsgenescanner:
 
     os.system(
-        "python3 %s/alsgenescanner.py %s/annovar.vcf.hg19_multianno.txt %s/results/%s_alsgenescanner_all.txt"
-        % (path_scripts, out, out, sample_name))
+        "python3 %s/alsgenescanner.py %s/annovar.vcf.%s_multianno.txt %s/results/%s_alsgenescanner_all.txt"
+        % (path_scripts, out, ref_hg, out, sample_name))
     os.system(
         "cat %s/results/%s_alsgenescanner_all.txt | head -1 > %s/results/%s_alsgenescanner_alsod.txt; cat %s/results/%s_alsgenescanner_all.txt | grep -iwf %s/list_genes_alsod.txt >> %s/results/%s_alsgenescanner_alsod.txt"
         % (out, sample_name, out, sample_name, out, sample_name, path_to_db,
