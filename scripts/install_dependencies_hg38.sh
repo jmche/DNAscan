@@ -61,6 +61,9 @@ conda config --add channels r
 
 conda config --add channels bioconda
 
+conda update python
+conda install -y python=3.6
+
 conda install -y samtools
 
 conda install -y freebayes
@@ -88,6 +91,7 @@ conda install -y expansionhunter
 conda install -y sambamba
 
 conda install -y samblaster
+conda install -y monotonic
 
 gatk-register $GATK_DOWNLOAD_DIR 
 
