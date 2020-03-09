@@ -29,17 +29,17 @@ cd $DNASCAN_DIR
 
 chmod +x $ANNOVAR_DIR/*
 
-# nohup $ANNOVAR_DIR/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar cadd $INSTALL_DIR/humandb/ &
+# nohup $ANNOVAR_DIR/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar cadd $INSTALL_DIR/humandb/ &
 
-# $ANNOVAR_DIR/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar refGene $INSTALL_DIR/humandb/
+# $ANNOVAR_DIR/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar refGene $INSTALL_DIR/humandb/
 
-# $ANNOVAR_DIR/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar exac03 $INSTALL_DIR/humandb/
+# $ANNOVAR_DIR/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar exac03 $INSTALL_DIR/humandb/
 
-# $ANNOVAR_DIR/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar dbnsfp30a $INSTALL_DIR/humandb/
+# $ANNOVAR_DIR/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar dbnsfp30a $INSTALL_DIR/humandb/
 
-# $ANNOVAR_DIR/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar clinvar_20170130 $INSTALL_DIR/humandb/
+# $ANNOVAR_DIR/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar clinvar_20170130 $INSTALL_DIR/humandb/
 
-# $ANNOVAR_DIR/annotate_variation.pl -buildver hg19 -downdb -webfrom annovar avsnp147 $INSTALL_DIR/humandb/
+# $ANNOVAR_DIR/annotate_variation.pl -buildver hg38 -downdb -webfrom annovar avsnp147 $INSTALL_DIR/humandb/
 
 cd $INSTALL_DIR
 
@@ -94,10 +94,11 @@ gatk-register $GATK_DOWNLOAD_DIR
 cd $DNASCAN_DIR
 
 mkdir -p hg19
+mkdir -p hg38
 
-# cd hg19
+# cd hg38
 
-# wget http://hgdownload.cse.ucsc.edu/goldenPath/hg19/bigZips/chromFa.tar.gz
+# wget http://hgdownload.cse.ucsc.edu/goldenPath/hg38/bigZips/chromFa.tar.gz
 
 # tar -zxvf chromFa.tar.gz
 
@@ -105,11 +106,11 @@ mkdir -p hg19
 
 # rm chr*
 
-# samtools faidx hg19.fa
+# samtools faidx hg38.fa
 
-# nohup bwa index hg19.fa &
+# nohup bwa index hg38.fa &
 
-# nohup hisat2-build -p $NUM_CPUS hg19.fa hg19 &
+# nohup hisat2-build -p $NUM_CPUS hg38.fa hg38 &
 
 apt-get update -qq
 
@@ -131,11 +132,11 @@ cd ..
 
 cd $DNASCAN_DIR
 
-sed "s|path_reference = \"\"|path_reference = \"$DNASCAN_DIR\/hg19\/hg19.fa\"|" scripts/paths_configs.py > scripts/paths_configs.py_temp
+sed "s|path_reference = \"\"|path_reference = \"$DNASCAN_DIR\/hg38\/hg38.fa\"|" scripts/paths_configs.py > scripts/paths_configs.py_temp
 
-sed "s|path_hisat_index = \"\"|path_hisat_index = \"$DNASCAN_DIR\/hg19\/hg19\"|" scripts/paths_configs.py_temp > scripts/paths_configs.py
+sed "s|path_hisat_index = \"\"|path_hisat_index = \"$DNASCAN_DIR\/hg38\/hg38\"|" scripts/paths_configs.py_temp > scripts/paths_configs.py
 
-sed "s|path_bwa_index = \"\"|path_bwa_index = \"$DNASCAN_DIR\/hg19\/hg19.fa\"|" scripts/paths_configs.py > scripts/paths_configs.py_temp
+sed "s|path_bwa_index = \"\"|path_bwa_index = \"$DNASCAN_DIR\/hg38\/hg38.fa\"|" scripts/paths_configs.py > scripts/paths_configs.py_temp
 
 sed "s|path_annovar = \"\"|path_annovar = \"$ANNOVAR_DIR\/\"|" scripts/paths_configs.py_temp > scripts/paths_configs.py
 
