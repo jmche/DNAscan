@@ -103,6 +103,8 @@ conda install -y sambamba
 
 conda install -y samblaster
 
+conda install -y monotonic
+
 gatk-register $GATK_DOWNLOAD_DIR 
 
 cd $DNASCAN_DIR
