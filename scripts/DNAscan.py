@@ -537,19 +537,19 @@ print('\nOptions saved onto %s/logs/options.log \n' %(out))
 
 # Y. adapt DB to reference
 
-if reference == "grch37" or  reference == "grch38" :
+# if reference == "grch37" or  reference == "grch38" :
     
-    if reference == "grch37":
+#     if reference == "grch37":
         
-        ref_hg = "hg19"
+#         ref_hg = "hg19"
         
-    else:
+#     else:
         
-        ref_hg = "hg38"
+#         ref_hg = "hg38"
     
-    os.system("zcat %s/exome_%s.bed.gz | sed 's/chr//g' | bgzip -c > %s/exome_%s.bed.gz" %(path_to_db,ref_hg,path_to_db,reference) )
-    os.system("zcat %s/%s_gene_db.txt.gz | sed 's/chr//g' | bgzip -c > %s/%s_gene_db.txt.gz" %(path_to_db,ref_hg,path_to_db,reference) )
-    os.system("cp %s/%s_gene_names.txt.gz  %s/%s_gene_names.txt.gz" %(path_to_db,ref_hg,path_to_db,reference) )
+#     os.system("zcat %s/exome_%s.bed.gz | sed 's/chr//g' | bgzip -c > %s/exome_%s.bed.gz" %(path_to_db,ref_hg,path_to_db,reference) )
+#     os.system("zcat %s/%s_gene_db.txt.gz | sed 's/chr//g' | bgzip -c > %s/%s_gene_db.txt.gz" %(path_to_db,ref_hg,path_to_db,reference) )
+#     os.system("cp %s/%s_gene_names.txt.gz  %s/%s_gene_names.txt.gz" %(path_to_db,ref_hg,path_to_db,reference) )
     
 if alsgenescanner:
 
@@ -600,7 +600,9 @@ if reference == "grch37" or  reference == "grch38" :
             )
         
         annotation = False
-    
+        
+ref_hg = reference
+
 if BED or path_gene_list:
 
     if path_bed:
