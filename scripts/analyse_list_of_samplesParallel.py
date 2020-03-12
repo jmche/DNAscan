@@ -16,7 +16,7 @@
 #   5.3 Run DNAscan for one sample
 ################################################################
 
-import argparse, os, os.path, random, string
+import argparse, os, os.path, random, string, time
 import paths_configs
 
 from argparse import RawTextHelpFormatter
