@@ -381,6 +381,14 @@ parser.add_argument(
     help=
     'path to the reference file in fasta format [string]'
 )
+parser.add_argument(
+    '-usedCpu',
+    action="store",
+    dest="usedCpu",
+    default= "",
+    help=
+    'number of cpu [string]'
+)
 
 parser.add_argument(
     '-dnascan_dir',
@@ -478,8 +486,14 @@ RG = args.RG
 
 ref_file = args.ref_file 
 
+usedCpu = args.usedCpu 
+
 dnascan_main_dir = args.dnascan_dir
 
+if usedCpu:
+    
+    num_cpu = usedCpu
+    
 if ref_file:
     
     path_reference = ref_file
