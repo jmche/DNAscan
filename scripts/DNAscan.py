@@ -1793,5 +1793,5 @@ if alsgenescanner:
            out, sample_name, out, sample_name))
     
 
-estimateTime()
+estimateTime(start_time)
     
