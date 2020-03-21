@@ -22,7 +22,18 @@ import paths_configs
 from argparse import RawTextHelpFormatter
 from subprocess import Popen, PIPE, call
 from string import Template
-
+import time
+def estimateTime(start_time):
+    end_time = time.time()
+    used_time = end_time - start_time
+    print('\n\n')
+    print('Start: ' + time.strftime('%Y-%m-%d  %H:%M:%S',time.localtime(start_time)))
+    print('End: ' + time.strftime('%Y-%m-%d  %H:%M:%S',time.localtime(end_time)))
+    print("\nSpend: {0}day(s), {1}hour(s), {2}min(s), {3}sec(s).".format(int(used_time/86400), 
+                                                                         int(used_time%86400/3600), 
+                                                                         int(used_time%86400%3600/60), 
+                                                                         "%.2f"%(used_time%86400%3600%60))) 
+start_time = time.time()
 def multisubprocess(commandline, thrNum, waitProcess=True, execute=True, logFile=None, generateTmp = False):
     tempFile=os.path.join(os.path.realpath(__file__).rsplit('/', 2)[0], 'tmp')
     if generateTmp:
@@ -182,3 +193,4 @@ for sample in list_file_lines :
 multisubprocess(cmdCreateTree, 5, waitProcess=True, execute=True, logFile=None)
 multisubprocess(cmdRun, int(processN), waitProcess=True, execute=True, logFile=None)
 print("Done")
+estimateTime()
