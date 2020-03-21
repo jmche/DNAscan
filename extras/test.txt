@@ -1,0 +1,1 @@
+/workDir/Tools/DNAscan/data/test_data_R1.fq.gz	/workDir/Tools/DNAscan/data/test_data_R2.fq.gz
