@@ -72,7 +72,7 @@ def estimateTime(start_time):
                                                                          int(used_time%86400/3600), 
                                                                          int(used_time%86400%3600/60), 
                                                                          "%.2f"%(used_time%86400%3600%60))) 
-start_time <- time.time()
+start_time = time.time()
 # 2. Define paths_configs variables from paths_configs.py
 
 path_iobio = paths_configs.path_iobio
