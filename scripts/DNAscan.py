@@ -61,7 +61,18 @@ import paths_configs
 import subprocess
 
 from argparse import RawTextHelpFormatter
-
+import time
+def estimateTime(start_time):
+    end_time = time.time()
+    used_time = end_time - start_time
+    print('\n\n')
+    print('Start: ' + time.strftime('%Y-%m-%d  %H:%M:%S',time.localtime(start_time)))
+    print('End: ' + time.strftime('%Y-%m-%d  %H:%M:%S',time.localtime(end_time)))
+    print("\nSpend: {0}day(s), {1}hour(s), {2}min(s), {3}sec(s).".format(int(used_time/86400), 
+                                                                         int(used_time%86400/3600), 
+                                                                         int(used_time%86400%3600/60), 
+                                                                         "%.2f"%(used_time%86400%3600%60))) 
+start_time <- time.time()
 # 2. Define paths_configs variables from paths_configs.py
 
 path_iobio = paths_configs.path_iobio
@@ -1780,4 +1791,7 @@ if alsgenescanner:
         "cat %s/results/%s_alsgenescanner_all.txt | head -1 > %s/results/%s_alsgenescanner_all_ranked.txt ; cat %s/results/%s_alsgenescanner_all.txt | grep -i pathog | sed 's/ /_/g'| sort -k10nr >> %s/results/%s_alsgenescanner_all_ranked.txt ; cat %s/results/%s_alsgenescanner_all.txt | grep '^chr'  | grep -iv pathog | sed 's/ /_/g'| sort -k10nr >> %s/results/%s_alsgenescanner_all_ranked.txt  "
         % (out, sample_name, out, sample_name, out, sample_name, out, sample_name, 
            out, sample_name, out, sample_name))
+    
+
+estimateTime()
     
