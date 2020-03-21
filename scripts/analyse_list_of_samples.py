@@ -101,4 +101,4 @@ for sample in list_file_lines :
     os.system( "%s %sDNAscan.py %s -sample_name %s %s -out %s/%s/ " %( python_path , dnascan_dir , option_string , sample_name , input_file_string , out_dir , sample_name) )
         
         
-estimateTime()
+estimateTime(start_time)
