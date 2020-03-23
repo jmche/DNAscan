@@ -853,6 +853,8 @@ if alignment:
                     rg_option_hisat2 = " --rg-id %s --rg LB:%s --rg PL:%s  --rg PU:%s --rg SM:%s " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
+#                     rg_option_bwa = " -R '@RG\tID:%s\tLB:%s\tPL:%s\tRGPU:%s\tSM:%s' " % (
+#                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
                     rg_option_bwa = " -R '@RG\\tID:%s\\tLB:%s\\tPL:%s\\tRGPU:%s\\tSM:%s' " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
@@ -942,6 +944,8 @@ if alignment:
                     rg_option_hisat2 = " --rg-id %s --rg LB:%s --rg PL:%s  --rg PU:%s --rg SM:%s " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
+#                     rg_option_bwa = " -R '@RG\tID:%s\tLB:%s\tPL:%s\tRGPU:%s\tSM:%s' " % (
+#                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
                     rg_option_bwa = " -R '@RG\\tID:%s\\tLB:%s\\tPL:%s\\tRGPU:%s\\tSM:%s' " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
