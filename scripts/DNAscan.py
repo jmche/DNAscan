@@ -853,7 +853,7 @@ if alignment:
                     rg_option_hisat2 = " --rg-id %s --rg LB:%s --rg PL:%s  --rg PU:%s --rg SM:%s " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
-                    rg_option_bwa = " -R '@RG\tID:%s\tLB:%s\tPL:%s\tRGPU:%s\tSM:%s' " % (
+                    rg_option_bwa = " -R '@RG\\tID:%s\\tLB:%s\\tPL:%s\\tRGPU:%s\\tSM:%s' " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
                 else:
@@ -873,10 +873,16 @@ if alignment:
                     "%ssamtools view -@ %s -bhf 4 %ssorted.bam | samtools bam2fq - > %sunaligned_reads.fq"
                     % (path_samtools, num_cpu, out, out))
 
+#                 os.system(
+#                     "%sbwa mem %s %s -t %s %s %sunaligned_reads.fq | %s %ssamtools view -@ %s -Sb -  | %ssambamba sort -t %s -o %ssorted_bwa.bam  /dev/stdin ; %ssamtools index -@ %s %ssorted_bwa.bam "
+#                     % (path_bwa, bwa_custom_options, rg_option_bwa, num_cpu, path_bwa_index, out,
+#                        samblaster_cmq, path_samtools, num_cpu, path_sambamba,
+#                        num_cpu, out, path_samtools, num_cpu, out))
+                
                 os.system(
-                    "%sbwa mem %s %s -t %s %s %sunaligned_reads.fq | %s %ssamtools view -@ %s -Sb -  | %ssambamba sort -t %s -o %ssorted_bwa.bam  /dev/stdin ; %ssamtools index -@ %s %ssorted_bwa.bam "
+                    "%sbwa mem %s %s -t %s %s %sunaligned_reads.fq | samblaster --ignoreUnmated | %ssamtools view -@ %s -Sb -  | %ssambamba sort -t %s -o %ssorted_bwa.bam  /dev/stdin ; %ssamtools index -@ %s %ssorted_bwa.bam "
                     % (path_bwa, bwa_custom_options, rg_option_bwa, num_cpu, path_bwa_index, out,
-                       samblaster_cmq, path_samtools, num_cpu, path_sambamba,
+                       path_samtools, num_cpu, path_sambamba,
                        num_cpu, out, path_samtools, num_cpu, out))
 
                 os.system("%ssamtools view -H %ssorted.bam > %sheader.txt" %
@@ -936,7 +942,7 @@ if alignment:
                     rg_option_hisat2 = " --rg-id %s --rg LB:%s --rg PL:%s  --rg PU:%s --rg SM:%s " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
-                    rg_option_bwa = " -R '@RG\tID:%s\tLB:%s\tPL:%s\tRGPU:%s\tSM:%s' " % (
+                    rg_option_bwa = " -R '@RG\\tID:%s\\tLB:%s\\tPL:%s\\tRGPU:%s\\tSM:%s' " % (
                         RG_ID, RG_LB, RG_PL, RG_PU, RG_SM)
 
                 else:
@@ -954,10 +960,16 @@ if alignment:
                     "%ssamtools view -@ %s -bhf 4 %ssorted.bam | samtools bam2fq - > %sunaligned_reads.fq"
                     % (path_samtools, num_cpu, out, out))
 
+#                 os.system(
+#                     "%sbwa mem %s %s -t %s %s %sunaligned_reads.fq| %s %ssamtools view -Sb -  | %ssambamba sort -t %s -o %ssorted_bwa.bam /dev/stdin; %ssamtools index -@ %s %ssorted_bwa.bam "
+#                     % (path_bwa, bwa_custom_options, rg_option_bwa, num_cpu, path_bwa_index, out,
+#                        samblaster_cmq, path_samtools, path_sambamba, num_cpu,
+#                        out, path_samtools, num_cpu, out))
+                
                 os.system(
-                    "%sbwa mem %s %s -t %s %s %sunaligned_reads.fq| %s %ssamtools view -Sb -  | %ssambamba sort -t %s -o %ssorted_bwa.bam /dev/stdin; %ssamtools index -@ %s %ssorted_bwa.bam "
+                    "%sbwa mem %s %s -t %s %s %sunaligned_reads.fq| samblaster --ignoreUnmated | %ssamtools view -Sb -  | %ssambamba sort -t %s -o %ssorted_bwa.bam /dev/stdin; %ssamtools index -@ %s %ssorted_bwa.bam "
                     % (path_bwa, bwa_custom_options, rg_option_bwa, num_cpu, path_bwa_index, out,
-                       samblaster_cmq, path_samtools, path_sambamba, num_cpu,
+                       path_samtools, path_sambamba, num_cpu,
                        out, path_samtools, num_cpu, out))
 
                 os.system("%ssamtools view -H %ssorted.bam > %sheader.txt" %
@@ -1097,7 +1109,7 @@ if variantcalling:
 
                 while counter < int(num_cpu) + 1:
 
-                    command = "%sjava -jar %sGenomeAnalysisTK.jar %s -R %s -T HaplotypeCaller -I %s -L %smpileup_positions%s.bed -o %sgatk_indels%s.vcf" % (
+                    command = "%sjava -Xmx16g -jar %sGenomeAnalysisTK.jar %s -R %s -T HaplotypeCaller -I %s -L %smpileup_positions%s.bed -o %sgatk_indels%s.vcf" % (
                         path_java, path_gatk, gatk_HC_custom_options, path_reference, bam_file, out,
                         str(counter), out, str(counter))
 
@@ -1110,10 +1122,20 @@ if variantcalling:
                 for proc_gatk in ps:
 
                     proc_gatk.wait()
+                allFiles = [f for f in os.listdir(out) if os.path.isfile(os.path.join(out, f)) and len(re.findall('^gatk_indels\d.vcf$', f)) > 0]
+                allFiles = sorted(allFiles)
+                print(allFiles)
 
-                os.system(
-                    "cat %sgatk_indels1.vcf | grep \"^#\" >> %sgatk_indels_merged.vcf ; for i in $(ls %s | grep gatk_indels | grep -v idx); do cat %s$i | grep -v \"^#\" >> %sgatk_indels_merged.vcf; done"
-                    % (out, out, out, out, out))
+                for catI in range(len(allFiles)):
+                    print("cat %s > %sgatk_indels_merged.vcf" % (out+allFiles[catI], out))
+                    if catI == 0:
+                        os.system("cat %s > %sgatk_indels_merged.vcf" % (out+allFiles[catI], out))
+                    else:
+                        os.system("cat %s | grep -v \"^#\" >> %sgatk_indels_merged.vcf" % (out+allFiles[catI], out))
+                        
+#                 os.system(
+#                     "cat %sgatk_indels1.vcf | grep \"^#\" >> %sgatk_indels_merged.vcf ; for i in $(ls %s | grep gatk_indels | grep -v idx); do cat %s$i | grep -v \"^#\" >> %sgatk_indels_merged.vcf; done"
+#                     % (out, out, out, out, out))
 
                 os.system(
                     "%sbedtools sort -header -i %sgatk_indels_merged.vcf > %sgatk_indels_sorted_merged.vcf"
@@ -1152,9 +1174,20 @@ if variantcalling:
 
                 os.system("date")
 
-                os.system(
-                    "cat %sfreebayes1.vcf | grep \"^#\" >> %smerged.vcf ; for i in $(ls %s | grep freebayes) ; do cat %s$i | grep -v \"^#\" >> %smerged.vcf; done"
-                    % (out, out, out, out, out))
+                allFiles = [f for f in os.listdir(out) if os.path.isfile(os.path.join(out, f)) and len(re.findall('^freebayes\d.vcf$', f)) > 0]
+                allFiles = sorted(allFiles)
+                print(allFiles)
+
+                for catI in range(len(allFiles)):
+                    print("cat %s > %ssmerged.vcf" % (out+allFiles[catI], out))
+                    if catI == 0:
+                        os.system("cat %s > %smerged.vcf" % (out+allFiles[catI], out))
+                    else:
+                        os.system("cat %s | grep -v \"^#\" >> %smerged.vcf" % (out+allFiles[catI], out))
+                
+#                 os.system(
+#                     "cat %sfreebayes1.vcf | grep \"^#\" >> %smerged.vcf ; for i in $(ls %s | grep freebayes) ; do cat %s$i | grep -v \"^#\" >> %smerged.vcf; done"
+#                     % (out, out, out, out, out))
 
                 os.system(
                     "%sbedtools sort -header -i %smerged.vcf > %sfreebayes.vcf"
@@ -1183,7 +1216,7 @@ if variantcalling:
                         % (path_tabix, out, path_tabix, out))
 
                     os.system(
-                        "%sjava -jar %sGenomeAnalysisTK.jar -T CombineVariants  -minimalVCF -R %s --variant %sSNPs_only.recode.vcf.gz --variant %sindels_only.recode.vcf.gz -o  %s%s.vcf --genotypemergeoption UNSORTED"
+                        "%sjava -Xmx16g -jar %sGenomeAnalysisTK.jar -T CombineVariants  -minimalVCF -R %s --variant %sSNPs_only.recode.vcf.gz --variant %sindels_only.recode.vcf.gz -o  %s%s.vcf --genotypemergeoption UNSORTED"
                         % (path_java, path_gatk, path_reference, out, out, out,
                            sample_name))
 
