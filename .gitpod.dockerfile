@@ -18,7 +18,12 @@ RUN apt-get update && apt-get install -y python3 python3-dev python3-venv build-
     echo "c.NotebookApp.port = 8888" >> ~/.jupyter/jupyter_notebook_config.py && \
     echo "c.NotebookApp.allow_root = True" >> ~/.jupyter/jupyter_notebook_config.py && \
     mkdir -p $workTools && mkdir -p $workData && mkdir -p $workResults && mkdir -p $workTemp && \
-    apt-get purge --autoremove -y curl && \
     apt-get autoremove
 
-USER root
+RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH" \
+    MANPATH="$MANPATH:/home/linuxbrew/.linuxbrew/share/man" \
+    INFOPATH="$INFOPATH:/home/linuxbrew/.linuxbrew/share/info" \
+    HOMEBREW_NO_AUTO_UPDATE=1
+RUN sudo apt-get remove -y cmake \
+    && brew install cmake
