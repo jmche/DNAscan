@@ -1,2 +1,11 @@
 image:
   file: .gitpod.dockerfile
+ports:
+- port: 8001
+  onOpen: notify
+- port: 8002
+  onOpen: notify
+- port: 8888
+  onOpen: notify
+- port: 3306
+  onOpen: ignore
