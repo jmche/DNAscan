@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y python3 python3-dev python3-venv build-
     mkdir -p $workTools && mkdir -p $workData && mkdir -p $workResults && mkdir -p $workTemp && \
     apt-get autoremove
 
+USER gitpod
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/Linuxbrew/install/master/install.sh)"
 ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:$PATH" \
     MANPATH="$MANPATH:/home/linuxbrew/.linuxbrew/share/man" \
