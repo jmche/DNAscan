@@ -19,5 +19,5 @@ RUN apt-get update && apt-get install -y python3 python3-dev python3-venv build-
     echo "c.NotebookApp.allow_root = True" >> ~/.jupyter/jupyter_notebook_config.py && \
     mkdir -p $workTools && mkdir -p $workData && mkdir -p $workResults && mkdir -p $workTemp && \
     apt-get remove -y cmake && \
-    && brew install cmake && \
+    brew install cmake && \
     apt-get autoremove 
