@@ -20,3 +20,5 @@ RUN apt-get update && apt-get install -y python3 python3-dev python3-venv build-
     mkdir -p $workTools && mkdir -p $workData && mkdir -p $workResults && mkdir -p $workTemp && \
     apt-get purge --autoremove -y curl && \
     apt-get autoremove
+
+USER root
