@@ -1,4 +1,4 @@
-FROM gitpod/workspace-full
+FROM ubuntu:18.04
 RUN sudo apt-get update && sudo apt-get install -y python3 python3-dev python3-venv build-essential libcurl4-openssl-dev && \
     sudo apt-get install -y --no-install-recommends curl && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     sudo ln -sf /usr/bin/python3 /usr/bin/python && \
