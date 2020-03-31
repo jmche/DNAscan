@@ -6,7 +6,7 @@ ENV workData /workDir/Data
 ENV workResults /workDir/Results
 ENV workTemp /workDir/Temp
 
-RUN apt-get update && apt-get install -y python3 python3-dev python3-venv build-essential libcurl4-openssl-dev && \
+RUN apt-get update && apt-get install -y python3 python3-dev python3-venv build-essential libcurl4-openssl-dev sudo && \
     apt-get install -y --no-install-recommends curl && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && \
     ln -sf /usr/bin/python3 /usr/bin/python && \
     python get-pip.py && pip install --upgrade pip && \
